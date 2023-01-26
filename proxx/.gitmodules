@@ -1,0 +1,3 @@
+[submodule "Browser-Static"]
+	path = static
+	url = https://github.com/cohenerickson/Browser-Static
