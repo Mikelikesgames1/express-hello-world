@@ -1,11 +1,47 @@
 <script async src="https://cdn.now4real.com/now4real.js"></script>
 
-
+<script src="./adblockDetector.js"></script>
+	<script>
+	// Configure the adblock detector
+	(function(){
+		var enabledEl = document.getElementById('adb-enabled');
+		var disabledEl = document.getElementById('adb-not-enabled');
+		function adBlockDetected() {
+			enabledEl.style.display = 'block';
+			disabledEl.style.display = 'none';
+		}
+		function adBlockNotDetected() {
+			disabledEl.style.display = 'block';
+			enabledEl.style.display = 'none';
+		}
+		
+		if(typeof window.adblockDetector === 'undefined') {
+			adBlockDetected();
+		} else {
+			window.adblockDetector.init(
+				{
+					debug: true,
+					found: function(){
+						adBlockDetected();
+					},
+					notFound: function(){
+						adBlockNotDetected();
+					}
+				}
+			);
+		}
+	}());
+	</script>
 
 
 <!DOCTYPE html>
 <html>
 
+	<div class="center">
+<h5 class="bg-success" id="adb-not-enabled" style="display: none;">AdBlock is disabled</h5>
+<h5 class="bg-danger" id="adb-enabled" style="display: none;">AdBlock is enabled</h5>
+</div>
+	
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
